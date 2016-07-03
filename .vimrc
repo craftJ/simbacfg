@@ -52,7 +52,48 @@ let g:persistentBehaviour=0 "如果所有编辑文件都关闭了，退出vim
 
 
 "--------- cscope -------------------
-"setcscopequickfix=s-,c-,d-,i-,t-,e- "设定是否使用 quickfix 窗口来显示 cscope 结果
+"set cscopequickfix=s-,c-,d-,i-,t-,e- "设定是否使用 quickfix 窗口来显示 cscope 结果
+"自动加载cscope.out文件
+map <F10> :call LoadCscope()<cr>
+function! LoadCscope()
+	let db = findfile("cscope.out", ".;")
+	if (!empty(db))
+		let path = strpart(db, 0, match(db, "/cscope.out$"))
+		"echo path
+		"echo db
+		set nocscopeverbose " suppress 'duplicate connection' error
+		exe "cs add " . db . " " . path
+		set cscopeverbose
+	endif
+endfunction
+
+"加载cscope文件
+nmap ca :csadd cscope.out<cr>
+
+"查找代码符号
+nmap cs :cs find s <C-R>=expand("<cword>")<cr><cr>
+
+"查找本定义
+nmap cg :cs find g <C-R>=expand("<cword>")<cr><cr>
+
+"查找调用本函数的函数
+nmap cc :cs find c <C-R>=expand("<cword>")<cr><cr>
+
+"查找本字符
+nmap ct :cs find t <C-R>=expand("<cword>")<cr><cr>
+
+"查找egrep模式
+nmap ce :cs find e <C-R>=expand("<cword>")<cr><cr>
+
+"查找本文件
+nmap cf :cs find f <C-R>=expand("<cfile>")<cr><cr>
+
+"查找包含本文件的文件
+nmap ci :cs find i <C-R>=expand("<cfile>")<cr><cr>
+
+"查找本函数调用的函数
+nmap cd :cs find d <C-R>=expand("<cword>")<cr><cr>
+
 
 
 
