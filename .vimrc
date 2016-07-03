@@ -21,30 +21,47 @@ set tabstop=4
 set shiftwidth=4
 set cindent
 set showmatch
+set showmode
+set showcmd
 set linebreak
 set whichwrap=b,s,<,>,[,] " 光标从行首和行末时可以跳到另一行去
 set incsearch
 set hlsearch
+set ignorecase
+set smartcase
+set autowrite
+
+
+"-------- taglist ------------------
+"设置F9为显示taglist窗口的快捷键，否则要通过命令 :TlistOpen 或者:TlistToggle显示窗口
+map <silent> <F9> :TlistToggle<cr>  
+let Tlist_Use_Right_Window=0 "让窗口显示在右边，0的话就是显示在左边
+let Tlist_Show_One_File=1 "0表示让taglist可以同时展示多个文件的函数列表
+let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
+let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
+let Tlist_Process_File_Always=1 "实时更新tags
+let Tlist_Inc_Winwidth=0 "禁止自动改变当前vim窗口的大小
+
+
+
+"--------- winmanage ---------------
+map <silent> <F8> :WMToggle<cr>
+nmap wm :WMToggle<cr> 
+let g:winManagerWindowLayout='FileExplorer|TagList' " 设置管理的插件
+let g:persistentBehaviour=0 "如果所有编辑文件都关闭了，退出vim
+
+
+"--------- cscope -------------------
+"setcscopequickfix=s-,c-,d-,i-,t-,e- "设定是否使用 quickfix 窗口来显示 cscope 结果
+
 
 
 "---------- ctags --------------------
-let g:Tlist_Ctags_Cmd='/usr/bin/ctags'
+let g:Tlist_Ctags_Cmd='/usr/local/bin/ctags'
 map <F7> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 imap <F5> <ESC>:!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR><CR> :TlistUpdate<CR>
 set tags=tags
 set tags+=./tags
-
-
-
-
-"--------- Taglist setting ------------
-let Tlist_Use_Right_Window=1 "让窗口显示在右边，0的话就是显示在左边
-let Tlist_Show_One_File=0 "让taglist可以同时展示多个文件的函数列表
-let Tlist_File_Fold_Auto_Close=1 "非当前文件，函数列表折叠隐藏
-let Tlist_Exit_OnlyWindow=1 "当taglist是最后一个分割窗口时，自动推出vim
-let Tlist_Process_File_Always=1 "实时更新tags
-let Tlist_Inc_Winwidth=0
-
 
 
 
