@@ -1,0 +1,15 @@
+
+gcc:
+http://ftp.gnu.org/gnu/gcc/
+
+
+kernel:
+https://www.kernel.org/pub/linux
+
+
+glibc:
+http://ftp.ntu.edu.tw/gnu/glibc/
+
+
+
+
